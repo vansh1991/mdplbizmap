@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "RENF-.#####",
+ "creation": "2024-08-27 16:41:38.202580",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "condition_based_on",
+  "condition",
+  "conditions",
+  "column_break_qgtq",
+  "channel_or_dm",
+  "raven_channel",
+  "dm"
+ ],
+ "fields": [
+  {
+   "fieldname": "condition_based_on",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Condition Based On",
+   "options": "From\nTo\nSubject\nMessage"
+  },
+  {
+   "fieldname": "condition",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Condition"
+  },
+  {
+   "fieldname": "column_break_qgtq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "channel_or_dm",
+   "fieldtype": "Select",
+   "label": "Channel Or DM",
+   "options": "\nChannel\nDM"
+  },
+  {
+   "fieldname": "raven_channel",
+   "fieldtype": "Table MultiSelect",
+   "label": "Raven Channel",
+   "options": "Raven Channel List"
+  },
+  {
+   "fieldname": "dm",
+   "fieldtype": "Table MultiSelect",
+   "label": "DM",
+   "options": "Raven DM List"
+  },
+  {
+   "default": "0",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "fieldname": "conditions",
+   "fieldtype": "Text",
+   "in_list_view": 1,
+   "label": "Conditions",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-30 20:03:39.904089",
+ "modified_by": "Administrator",
+ "module": "MDPL",
+ "name": "Raven Email Notification Forwarding",
+ "naming_rule": "Expression (old style)",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
