@@ -1031,6 +1031,7 @@ def custom_get_advance_payment_entries(
 			party_type,
 			party,
 			party_account,
+			default_advance_account, # default_advance_account error fix:
 			limit,
 			condition,
 		)
@@ -1056,6 +1057,7 @@ def custom_get_advance_payment_entries(
 			party_type,
 			party,
 			party_account,
+			default_advance_account, # default_advance_account error fix:
 			limit,
 			condition,
 		)
@@ -1072,6 +1074,7 @@ def get_common_query(
 	party_type,
 	party,
 	party_account,
+	default_advance_account, # default_advance_account error fix:
 	limit,
 	condition,
 ):
@@ -1095,7 +1098,29 @@ def get_common_query(
 		.where(payment_entry.docstatus == 1)
 	)
 
-	
+	# default_advance_account error fix:
+	field = "paid_from" if payment_type == "Receive" else "paid_to"
+
+	q = q.select((payment_entry[f"{field}_account_currency"]).as_("currency"))
+	q = q.select(payment_entry[field])
+	account_condition = payment_entry[field].isin(party_account)
+	if default_advance_account:
+		q = q.where(
+			account_condition
+			| (
+				(payment_entry[field] == default_advance_account)
+				& (payment_entry.book_advance_payments_in_separate_party_account == 1)
+			)
+		)
+
+	else:
+		q = q.where(account_condition)
+
+	if payment_type == "Receive":
+		q = q.select((payment_entry.source_exchange_rate).as_("exchange_rate"))
+	else:
+		q = q.select((payment_entry.target_exchange_rate).as_("exchange_rate"))
+	# default_advance_account error fix:
 
 	if payment_type == "Receive":
 		q = q.select((payment_entry.paid_from_account_currency).as_("currency"))
