@@ -6,6 +6,12 @@ app_email = "bizmap@gmail.com"
 app_license = "mit"
 # required_apps = []
 
+# override delivery note
+import erpnext.stock.doctype.delivery_note.delivery_note as delivery_note
+from mdpl.mdpl.doctype.delivery_note import custom_make_sales_invoice
+
+delivery_note.make_sales_invoice = custom_make_sales_invoice
+
 # Includes in <head>
 # ------------------
 
