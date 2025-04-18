@@ -12,6 +12,12 @@ from mdpl.mdpl.doctype.delivery_note import custom_make_sales_invoice
 
 delivery_note.make_sales_invoice = custom_make_sales_invoice
 
+# override purchase receipt
+import erpnext.stock.doctype.purchase_receipt.purchase_receipt as purchase_receipt
+from mdpl.mdpl.doctype.purchase_receipt import custom_make_purchase_invoice
+
+purchase_receipt.make_purchase_invoice = custom_make_purchase_invoice
+
 # Includes in <head>
 # ------------------
 
